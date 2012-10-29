@@ -19,7 +19,7 @@
     <div id="row">
         <div class="span2" ng-repeat="algorithm in algorithms">
             <a id="{{algorithm}}" class="function btn btn-large btn-info btn-block"
-               href="#/converter/{{algorithm}}">{{ algorithm | lowercase}}</a>
+               href="#/converter/{{algorithm}}">{{ algorithm | uppercase}}</a>
         </div>
     </div>
 </div>
@@ -29,6 +29,7 @@
 <script src="lib/angular-1.0.2.js"></script>
 <script type="text/javascript" src="lib/core.js"></script>
 <script type="text/javascript" src="lib/md5.js"></script>
+<script type="text/javascript" src="lib/sha1.js"></script>
 <script src="lib/jquery-1.8.0.js"></script>
 <script src="lib/bootstrap-2.1.0/js/bootstrap.js"></script>
 <script src="app/ControllerCtrl.js"></script>

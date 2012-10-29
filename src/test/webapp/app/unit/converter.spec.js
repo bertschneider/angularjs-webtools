@@ -9,17 +9,19 @@ describe("converterService", function () {
         });
     });
 
-        it("should convert a string into MD5'", function () {
+    it("should convert a string into MD5", function () {
         expect(converterService.convert("MD5", "darkShadows")).toEqual("857ce4c416b0d5299055a0f6075b4f7f");
-        });
+    });
 
-        it("should convert empty strings to MD5", function(){
-            expect(converterService.convert("MD5", "")).toEqual("");
-        });
-    
-        it("should return empty string if we try to encode it to 'Donald Duck'", function() {
-          expect(converterService.convert("Donald Duck", "foo")).toEqual("");     
-        });
+    it("should convert empty strings to MD5", function () {
+        expect(converterService.convert("MD5", "")).toEqual("");
+    });
 
+    it("should return empty string if we try to encode it to 'Donald Duck'", function () {
+        expect(converterService.convert("Donald Duck", "foo")).toEqual("");
+    });
 
+    it("should convert a string into SHA1", function() {
+      expect(converterService.convert("SHA1", "Foo Bar")).toEqual("5cb8681884af2923487a6034d8dbe753828e2660");
+    });
 });

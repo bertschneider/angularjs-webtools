@@ -8,6 +8,7 @@ files = [
     'src/test/webapp/lib/angular-mocks-1.0.2.js',
     'src/main/webapp/lib/core.js',
     'src/main/webapp/lib/md5.js',
+    'src/main/webapp/lib/sha1.js',
     'src/main/webapp/app/*.js',
     'src/test/webapp/app/unit/*.spec.js'
 ];

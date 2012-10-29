@@ -2,9 +2,16 @@
 
 (function (angular) {
 
-    var converter = angular.module('Converter', []);
+    function validAlgorithm(algorithm) {
+        return algorithms.some(function (key) {
+            return key === algorithm;
+        });
+    }
 
-    converter.filter('lowercase', function () {
+    var algorithms = ['MD5', 'SHA1'],
+        converter = angular.module('Converter', []);
+
+    converter.filter('uppercase', function () {
         return function (text) {
             return text.toString().toUpperCase();
         };
@@ -18,18 +25,17 @@
 
     converter.controller('ConverterCtrl', ['$scope', '$routeParams', 'converterService',
         function ($scope, $routeParams, converterService) {
-            $scope.algorithms = ['MD5', 'SHA1'];
+            $scope.algorithms = algorithms;
             $scope.converter = $routeParams.converter;
-            $scope.hash = function() {
-                return converterService.convert("MD5", $scope.userText);
+            $scope.hash = function () {
+                return converterService.convert($scope.converter, $scope.userText);
             };
         }]);
 
     converter.factory('converterService', [function () {
         return {
             convert: function (algorithm, text) {
-
-                if (text) {
+                if (text && validAlgorithm(algorithm)) {
                     return CryptoJS[algorithm](text).toString();
                 }
                 return "";
