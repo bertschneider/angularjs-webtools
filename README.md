@@ -2,6 +2,7 @@ angularjs-webtools
 =====================
 
 angularjs-webtools is just a little angular test application.
+It implements some commonly used functions like converting a text into MD5 or SHA1.
 
 Commands
 ---------------------
