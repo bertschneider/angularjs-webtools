@@ -5,6 +5,41 @@
     var converter = angular.module('Converter', []),
         algorithms = ['MD5', 'SHA1'];
 
+    converter.directive('measure', function ($timeout) {
+        var continueProcessing = false,
+            count = 0,
+            measure = function (scope, fn) {
+                if (continueProcessing) {
+                    scope[fn]();
+                    count++;
+                    $timeout(function () {
+                        measure(scope, fn);
+                    });
+                }
+            };
+
+        return {
+            restrict: 'E',
+            template: '<label for="checkPerformance">Measure Performance?<input id="checkPerformance" type="checkbox" ng-model="checkPerformance"/><div id="measurement">{{measurement}}</div></label>',
+            link: function (scope, element, attrs) {
+                scope.$watch('checkPerformance', function (value) {
+                    continueProcessing = value;
+                    if (continueProcessing) {
+                        measure(scope, attrs.scopefunction);
+                        var update = function () {
+                            $timeout(function () {
+                                scope.measurement = count + "/s";
+                                count = 0;
+                                if (continueProcessing) {
+                                    update();
+                                }
+                            }, 1000);
+                        };
+                        update();
+                    }
+                });
+            }};
+    });
 
     converter.filter('uppercase', function () {
         return function (text) {
