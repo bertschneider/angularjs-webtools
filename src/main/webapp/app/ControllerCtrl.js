@@ -2,14 +2,9 @@
 
 (function (angular) {
 
-    function validAlgorithm(algorithm) {
-        return algorithms.some(function (key) {
-            return key === algorithm;
-        });
-    }
+    var converter = angular.module('Converter', []),
+        algorithms = ['MD5', 'SHA1'];
 
-    var algorithms = ['MD5', 'SHA1'],
-        converter = angular.module('Converter', []);
 
     converter.filter('uppercase', function () {
         return function (text) {
@@ -33,6 +28,12 @@
         }]);
 
     converter.factory('converterService', [function () {
+        function validAlgorithm(algorithm) {
+            return algorithms.some(function (key) {
+                return key === algorithm;
+            });
+        }
+
         return {
             convert: function (algorithm, text) {
                 if (text && validAlgorithm(algorithm)) {
