@@ -16,6 +16,15 @@
                         measure(scope, fn);
                     });
                 }
+            },
+            update = function (scope) {
+                $timeout(function () {
+                    scope.measurement = count + "/s";
+                    count = 0;
+                    if (continueProcessing) {
+                        update(scope);
+                    }
+                }, 1000);
             };
 
         return {
@@ -26,16 +35,7 @@
                     continueProcessing = value;
                     if (continueProcessing) {
                         measure(scope, attrs.scopefunction);
-                        var update = function () {
-                            $timeout(function () {
-                                scope.measurement = count + "/s";
-                                count = 0;
-                                if (continueProcessing) {
-                                    update();
-                                }
-                            }, 1000);
-                        };
-                        update();
+                        update(scope);
                     }
                 });
             }};
